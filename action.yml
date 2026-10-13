@@ -14,15 +14,18 @@ runs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - name: Update Flake
+      shell: bash
       run: |
         nix flake update
     - name: Updated build
+      shell: bash
       run: |
         nix flake check
         nix build "$OUT_ATTRIBUTE_DERIVATION"
       env:
         OUT_ATTRIBUTE_DERIVATION: ${{ inputs.derivation }}
     - name: Commit files
+      shell: bash
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
@@ -30,5 +33,5 @@ runs:
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ github.token }}
         branch: ${{ github.ref }}
