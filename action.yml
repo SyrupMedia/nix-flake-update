@@ -1,13 +1,11 @@
 name: "Nix"
 author: "MolassesLover"
 description: "Updates a Nix Flake at the repository's root, validates it and its output, then pushes it upstream if functional."
-
 inputs:
   derivation:
     description: 'Target output attribute for derivation.'
     required: true
     default: '.'
-
 runs:
   using: "composite"
   steps:
